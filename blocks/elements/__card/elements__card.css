@@ -1,0 +1,7 @@
+.elements__card {
+  background: #FFF;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 238px 44px;
+  grid-template-rows: 282px 1fr;
+}

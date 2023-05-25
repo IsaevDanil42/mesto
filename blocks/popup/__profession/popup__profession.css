@@ -1,6 +1,7 @@
 .popup__profession {
   margin: 30px auto 48px;
   min-width: 358px;
+  height: 27px;
   font-family: inherit;
   font-style: normal;
   font-weight: 400;

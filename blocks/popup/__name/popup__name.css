@@ -1,6 +1,7 @@
 .popup__name {
   margin: 0 auto;
   min-width: 358px;
+  min-height: 27px;
   font-family: inherit;
   font-style: normal;
   font-weight: 400;

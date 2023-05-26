@@ -1,17 +1,9 @@
 # Проект: Место
 
-### Обзор
+**Интро**
 
-* Figma
-* Картинки
+Проект от Яндекс.Практикума
+Адаптивный сайт с попапом созданный по [макету в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?type=design&node-id=28212-269&t=Bydplwp6IYNAeUFH-0)
 
-**Figma**
+[Ссылка на GitHub Pages](https://isaevdanil42.github.io/mesto/)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!

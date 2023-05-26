@@ -6,3 +6,11 @@
   flex-wrap: wrap;
 }
 
+@media screen and (max-width:634px) {
+  .profile__info {
+    max-width: 282px;
+    margin: 22px auto 36px;
+    justify-content: center;
+  }
+}
+

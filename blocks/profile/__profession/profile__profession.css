@@ -10,3 +10,13 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media screen and (max-width:634px) {
+  .profile__profession {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin-top: 14px;
+  }
+}
+

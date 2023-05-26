@@ -14,3 +14,10 @@
 .popup__profession:focus {
   outline: none;
 }
+
+@media screen and (max-width:634px) {
+  .popup__profession  {
+    min-width: 238px;
+    margin-bottom: 45px;
+  }
+}

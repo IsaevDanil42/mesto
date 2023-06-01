@@ -9,65 +9,64 @@
 <body class="page">
   <header class="header">
     <img class="header__logo" src="./images/header-logo.svg" alt="Логототип проекта">
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-btn"></button>
+        <button class="profile__edit-btn" type="button"></button>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="profile__add-btn"></button>
+      <button class="profile__add-btn" type="button"></button>
     </section>
     <section class="elements">
-      <article class="elements__card">
+      <div class="elements__card">
         <img class="elements__photo" src="./images/iceland.jpg" alt="Береговая линия в Исладнии">
         <h2 class="elements__title">Исладния</h2>
-        <button class="elements__like"></button>
-      </article>
-      <article class="elements__card">
+        <button class="elements__like" type="button"></button>
+      </div>
+      <div class="elements__card">
         <img class="elements__photo" src="./images/new-zealand.jpg" alt="Озеро в Новой Зеландии">
         <h2 class="elements__title">Новая Зеландия</h2>
-        <button class="elements__like"></button>
-      </article>
-      <article class="elements__card">
+        <button class="elements__like" type="button"></button>
+      </div>
+      <div class="elements__card">
         <img class="elements__photo" src="./images/italy.jpg" alt="Бухта в Итали">
         <h2 class="elements__title">Италия</h2>
-        <button class="elements__like"></button>
-      </article>
-      <article class="elements__card">
+        <button class="elements__like" type="button"></button>
+      </div>
+      <div class="elements__card">
         <img class="elements__photo" src="./images/indonesia.jpg" alt="Вид на поля и гору в Индонезии">
         <h2 class="elements__title">Индонезия</h2>
-        <button class="elements__like"></button>
-      </article>
-      <article class="elements__card">
+        <button class="elements__like" type="button"></button>
+      </div>
+      <div class="elements__card">
         <img class="elements__photo" src="./images/canada.jpg" alt="Канадские горы">
         <h2 class="elements__title">Канада</h2>
-        <button class="elements__like"></button>
-      </article>
-      <article class="elements__card">
+        <button class="elements__like" type="button"></button>
+      </div>
+      <div class="elements__card">
         <img class="elements__photo" src="./images/norway.jpg" alt="Северное сияние и горы в Норвегии">
         <h2 class="elements__title">Норвегия</h2>
-        <button class="elements__like"></button>
-      </article>
+        <button class="elements__like" type="button"></button>
+      </div>
     </section>
-    <div class="popup">
-      <form class="popup__container">
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <input class="popup__name" type="text">
-        <input class="popup__profession" type="text">
-        <button class="popup__submit-btn">Сохранить</button>
-        <button class="popup__close-btn"></button>
-      </form>
-    </div>
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2023 Mesto Russia</p>
   </footer>
-  <script src="./blocks/profile/__edit-btn/profile__edit-btn.js"></script>
-  <script src="./blocks/popup/__close-btn/popup__close-btn.js"></script>
-  <script src="./blocks/popup/__submit-btn/popup__submit-btn.js"></script>
+  <div class="popup">
+    <div class="popup__container">
+      <form class="popup__form" name="popup-about" method="post">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <input class="popup__input" id="name" name="input-name" placeholder="Имя" type="text">
+        <input class="popup__input" id="profession" name="input-profession" placeholder="О себе" type="text">
+        <button class="popup__submit-btn" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-btn" type="button"></button>
+    </div>
+  </div>
+  <script src="./pages/index.js"></script>
 </body>
 </html>

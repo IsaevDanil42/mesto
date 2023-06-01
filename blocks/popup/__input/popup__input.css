@@ -1,5 +1,5 @@
-.popup__name {
-  margin: 0 auto;
+.popup__input {
+  margin: 0 auto 30px;
   min-width: 358px;
   min-height: 27px;
   font-family: inherit;
@@ -11,12 +11,14 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.popup__name:focus {
+
+.popup__input:focus {
   outline: none;
 }
 
-@media screen and (max-width:634px) {
-  .popup__name {
+@media screen and (max-width:700px) {
+  .popup__input {
     min-width: 238px;
   }
 }
+

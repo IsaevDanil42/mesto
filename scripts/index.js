@@ -9,10 +9,11 @@ const editForm = document.querySelector('#edit-form');
 const addForm = document.querySelector('#add-form');
 const nameInput = document.querySelector('#name');
 const profInput = document.querySelector('#profession');
-const titleInput = document.querySelector('#title');
+const titleInput = document.querySelector('#place-name');
 const linkInput = document.querySelector('#link');
 const closeBtns = document.querySelectorAll('.popup__close-btn');
 const elements = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#card').content;
 const initialCards = [
   {
     name:'Исладния',
@@ -76,7 +77,6 @@ addForm.addEventListener('submit', (e) =>{
 });
 
 function createCard(cardData) {
-  const cardTemplate = document.querySelector('#card').content;
   const cardElements = cardTemplate.querySelector('.elements__card').cloneNode(true);
 
   cardElements.querySelector('.elements__delete-btn').addEventListener('click', () => cardElements.closest('.elements__card').remove());
@@ -99,12 +99,29 @@ function renderCard(cardData) {
   elements.prepend(createCard(cardData));
 }
 
+function closeKey(e) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if(e.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
+
+function closeByOverlay(e) {
+  if(e.target.className.includes('popup_opened')) {
+    closePopup(e.target);
+  }
+};
+
 function openPopup(elem) {
   elem.classList.add('popup_opened');
+  window.addEventListener('keydown', closeKey);
+  elem.addEventListener('click', closeByOverlay);
 };
 
 function closePopup(elem) {
   elem.classList.remove('popup_opened');
+  window.removeEventListener('keydown', closeKey);
+  elem.removeEventListener('click', closeByOverlay);
 };
 
 

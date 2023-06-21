@@ -31,9 +31,9 @@
       <form class="popup__form" id="edit-form" name="popup-about" method="post" novalidate>
         <h3 class="popup__title">Редактировать профиль</h3>
         <input class="popup__input" id="name" name="input-name" placeholder="Имя" type="text" minlength="2" maxlength="40" required>
-        <span class="popup__name"></span>
+        <span class="popup__error popup__name"></span>
         <input class="popup__input" id="profession" name="input-profession" placeholder="О себе" type="text" minlength="2" maxlength="200" required>
-        <span class="popup__profession"></span>
+        <span class="popup__error popup__profession"></span>
         <button class="popup__submit-btn" type="submit">Сохранить</button>
       </form>
       <button class="popup__close-btn" type="button"></button>
@@ -44,9 +44,9 @@
       <form class="popup__form" id="add-form" name="popup-about" method="post" novalidate>
         <h3 class="popup__title">Новое место</h3>
         <input class="popup__input" id="place-name" name="input-title" placeholder="Название" type="text" minlength="2" maxlength="30" required>
-        <span class="popup__place-name"></span>
+        <span class="popup__error popup__place-name"></span>
         <input class="popup__input" id="link" name="input-link" placeholder="Ссылка на картинку" type="url" required>
-        <span class="popup__link"></span>
+        <span class="popup__error popup__link"></span>
         <button class="popup__submit-btn" type="submit">Создать</button>
       </form>
       <button class="popup__close-btn" type="button"></button>

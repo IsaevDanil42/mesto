@@ -31,8 +31,10 @@ function hasInvalidInput(inputList) {
 function toogleButtonState(inputList, buttonElement, elementSettings) {
   if(hasInvalidInput(inputList)) {
     buttonElement.classList.add(elementSettings.inactiveButtonClass);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(elementSettings.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 };
 
@@ -42,10 +44,13 @@ function setEventListeners(formElement, elementSettings) {
 
   toogleButtonState(inputList, buttonElement, elementSettings);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', ()=> {
+    inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, elementSettings);
       toogleButtonState(inputList, buttonElement, elementSettings);
     })
+  });
+  formElement.addEventListener('submit', () => {
+    toogleButtonState(inputList, buttonElement, elementSettings);
   });
 };
 

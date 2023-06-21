@@ -100,8 +100,8 @@ function renderCard(cardData) {
 }
 
 function closeKey(e) {
-  const openedPopup = document.querySelector('.popup_opened');
   if(e.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }

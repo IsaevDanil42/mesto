@@ -1,5 +1,7 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 const editPopup = document.querySelector('#edit');
-const imagePopup = document.querySelector('#image');
+export const imagePopup = document.querySelector('#image');
 const addPopup = document.querySelector('#add');
 const editBtn = document.querySelector('.profile__edit-btn');
 const addBtn = document.querySelector('.profile__add-btn');
@@ -13,7 +15,7 @@ const titleInput = document.querySelector('#place-name');
 const linkInput = document.querySelector('#link');
 const closeBtns = document.querySelectorAll('.popup__close-btn');
 const elements = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#card').content;
+const formList = Array.from(document.querySelectorAll('.popup__form'));
 const initialCards = [
   {
     name:'Исладния',
@@ -40,10 +42,23 @@ const initialCards = [
     link:'./images/norway.jpg'
   }
 ];
+const validationSettings = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 initialCards.forEach((item) => {
-  renderCard(item);
+  const card = new Card(item, '#card');
+  renderCard(card.createCard());
 });
+
+formList.forEach((formElement) => {
+  const form = new FormValidator(validationSettings, formElement);
+  form.enableValidation();
+})
 
 closeBtns.forEach(button => {
   const openedPopup = button.closest('.popup');
@@ -70,34 +85,12 @@ editForm.addEventListener('submit', (e) => {
 addForm.addEventListener('submit', (e) =>{
   e.preventDefault();
   const cardObj = {name:titleInput.value, link:linkInput.value};
-  renderCard(cardObj);
+  const card = new Card(cardObj, '#card');
+  renderCard(card.createCard());
   titleInput.value = '';
   linkInput.value = '';
   closePopup(addPopup);
 });
-
-function createCard(cardData) {
-  const cardElements = cardTemplate.querySelector('.elements__card').cloneNode(true);
-
-  cardElements.querySelector('.elements__delete-btn').addEventListener('click', () => cardElements.closest('.elements__card').remove());
-  cardElements.querySelector('.elements__like').addEventListener('click', (e) => e.target.classList.toggle('elements__like_active'));
-  cardElements.querySelector('.elements__photo').addEventListener('click', () => {
-    imagePopup.querySelector('.popup__image').src = cardData.link;
-    imagePopup.querySelector('.popup__image').alt = cardData.name;
-    imagePopup.querySelector('.popup__subtitle').textContent = cardData.name;
-    openPopup(imagePopup);
-  });
-
-  cardElements.querySelector('.elements__photo').src = cardData.link;
-  cardElements.querySelector('.elements__photo').alt = cardData.name;
-  cardElements.querySelector('.elements__title').textContent = cardData.name;
-
-  return cardElements;
-};
-
-function renderCard(cardData) {
-  elements.prepend(createCard(cardData));
-}
 
 function closeKey(e) {
   if(e.key === 'Escape') {
@@ -112,7 +105,7 @@ function closeByOverlay(e) {
   }
 };
 
-function openPopup(elem) {
+export function openPopup(elem) {
   elem.classList.add('popup_opened');
   window.addEventListener('keydown', closeKey);
   elem.addEventListener('click', closeByOverlay);
@@ -124,4 +117,6 @@ function closePopup(elem) {
   elem.removeEventListener('click', closeByOverlay);
 };
 
-
+function renderCard(cardElement) {
+  elements.prepend(cardElement);
+};

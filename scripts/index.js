@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import { initialCards, validationSettings } from './constants.js';
 const editPopup = document.querySelector('#edit');
 export const imagePopup = document.querySelector('#image');
 const addPopup = document.querySelector('#add');
@@ -16,48 +17,23 @@ const linkInput = document.querySelector('#link');
 const closeBtns = document.querySelectorAll('.popup__close-btn');
 const elements = document.querySelector('.elements');
 const formList = Array.from(document.querySelectorAll('.popup__form'));
-const initialCards = [
-  {
-    name:'Исладния',
-    link:'./images/iceland.jpg'
-  },
-  {
-    name:'Новая Зеландия',
-    link:'./images/new-zealand.jpg'
-  },
-  {
-    name:'Италия',
-    link:'./images/italy.jpg'
-  },
-  {
-    name:'Индонезия',
-    link:'./images/indonesia.jpg'
-  },
-  {
-    name:'Канада',
-    link:'./images/canada.jpg'
-  },
-  {
-    name:'Норвегия',
-    link:'./images/norway.jpg'
-  }
-];
-const validationSettings = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+
+addForm.addEventListener('submit', (e) =>{
+  e.preventDefault();
+  const card = createCard({name:titleInput.value, link:linkInput.value});
+  renderCard(card.createCard());
+  addForm.reset();
+  closePopup(addPopup);
+});
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '#card');
+  const card = createCard(item);
   renderCard(card.createCard());
 });
 
 formList.forEach((formElement) => {
-  const form = new FormValidator(validationSettings, formElement);
-  form.enableValidation();
+  const formValidator = new FormValidator(validationSettings, formElement);
+  formValidator.enableValidation();
 })
 
 closeBtns.forEach(button => {
@@ -80,16 +56,6 @@ editForm.addEventListener('submit', (e) => {
   nameProfile.textContent = nameInput.value;
   profProfile.textContent = profInput.value;
   closePopup(editPopup);
-});
-
-addForm.addEventListener('submit', (e) =>{
-  e.preventDefault();
-  const cardObj = {name:titleInput.value, link:linkInput.value};
-  const card = new Card(cardObj, '#card');
-  renderCard(card.createCard());
-  titleInput.value = '';
-  linkInput.value = '';
-  closePopup(addPopup);
 });
 
 function closeKey(e) {
@@ -115,6 +81,11 @@ function closePopup(elem) {
   elem.classList.remove('popup_opened');
   window.removeEventListener('keydown', closeKey);
   elem.removeEventListener('click', closeByOverlay);
+};
+
+function createCard(cardData) {
+  const card = new Card(cardData, '#card')
+  return card;
 };
 
 function renderCard(cardElement) {

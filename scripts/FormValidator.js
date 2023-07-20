@@ -67,6 +67,9 @@ export default class FormValidator {
         this.#toogleButtonState();
       })
     });
+    this.#formElement.addEventListener('submit', () => {
+      this.#toogleButtonState();
+    })
   }
 
   enableValidation() {

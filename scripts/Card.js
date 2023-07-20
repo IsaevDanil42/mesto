@@ -5,6 +5,7 @@ export default class Card {
   #link;
   #templateSelector;
   #element;
+  #elementPhoto;
   constructor(data, templateSelector) {
     this.#name = data.name;
     this.#link = data.link;
@@ -50,11 +51,12 @@ export default class Card {
 
   createCard() {
     this.#element = this.#getTemplate();
+    this.#elementPhoto = this.#element.querySelector('.elements__photo');
     this.#setEventListeners();
 
     this.#element.querySelector('.elements__title').textContent = this.#name;
-    this.#element.querySelector('.elements__photo').src = this.#link;
-    this.#element.querySelector('.elements__photo').alt = this.#name;
+    this.#elementPhoto.src = this.#link;
+    this.#elementPhoto.alt = this.#name;
 
     return this.#element;
   }

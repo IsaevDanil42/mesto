@@ -7,13 +7,13 @@ export default class FormValidator {
   #formElement;
   #inputList;
   #buttonElement;
-  constructor(settings, formElement) {
+  constructor(settings, formSelector) {
     this.#inputSelector = settings.inputSelector;
     this.#submitButtonSelector = settings.submitButtonSelector;
     this.#inactiveButtonClass = settings.inactiveButtonClass;
     this.#inputErrorClass = settings.inputErrorClass;
     this.#errorClass = settings.errorClass;
-    this.#formElement = formElement;
+    this.#formElement = document.querySelector(formSelector);
   }
 
   #showInputError(inputElement, errorMessage) {
@@ -60,8 +60,10 @@ export default class FormValidator {
     this.#inputList = Array.from(this.#formElement.querySelectorAll(this.#inputSelector));
     this.#buttonElement = this.#formElement.querySelector(this.#submitButtonSelector);
 
+
     this.#toogleButtonState();
     this.#inputList.forEach((inputElement) => {
+      this.#isValid(inputElement);
       inputElement.addEventListener('input', () => {
         this.#isValid(inputElement);
         this.#toogleButtonState();

@@ -1,14 +1,14 @@
-import { openPopup, imagePopup } from './index.js';
-
 export default class Card {
   #name;
   #link;
+  #handleCardClick;
   #templateSelector;
   #element;
   #elementPhoto;
-  constructor(data, templateSelector) {
-    this.#name = data.name;
-    this.#link = data.link;
+  constructor({ cardItem, handleCardClick }, templateSelector) {
+    this.#name = cardItem.name || cardItem.placename;
+    this.#link = cardItem.link;
+    this.#handleCardClick = handleCardClick;
     this.#templateSelector = templateSelector;
   }
 
@@ -26,13 +26,6 @@ export default class Card {
     this.#element.remove();
   }
 
-  #handleOpenImagePopup() {
-    imagePopup.querySelector('.popup__image').alt = this.#name;
-    imagePopup.querySelector('.popup__image').src = this.#link;
-    imagePopup.querySelector('.popup__subtitle').textContent = this.#name;
-    openPopup(imagePopup);
-  }
-
   #toggleLike(e) {
     e.target.classList.toggle('elements__like_active');
   }
@@ -40,10 +33,10 @@ export default class Card {
   #setEventListeners() {
     this.#element.querySelector('.elements__delete-btn').addEventListener('click', () => {
       this.#handleDeleteCard();
-    })
-    this.#element.querySelector('.elements__photo').addEventListener('click', () => {
-      this.#handleOpenImagePopup();
-    })
+    });
+    this.#elementPhoto.addEventListener('click', () => {
+      this.#handleCardClick(this.#name, this.#link);
+    });
     this.#element.querySelector('.elements__like').addEventListener('click', (e) => {
       this.#toggleLike(e);
     });

@@ -6,7 +6,7 @@ export default class Card {
   #element;
   #elementPhoto;
   constructor({ cardItem, handleCardClick }, templateSelector) {
-    this.#name = cardItem.name || cardItem.placename;
+    this.#name = cardItem.name;
     this.#link = cardItem.link;
     this.#handleCardClick = handleCardClick;
     this.#templateSelector = templateSelector;

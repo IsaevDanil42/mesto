@@ -44,4 +44,4 @@ export const editBtn = document.querySelector('.profile__edit-btn');
 export const addBtn = document.querySelector('.profile__add-btn');
 export const nameInput = document.querySelector('#name');
 export const profInput = document.querySelector('#profession');
-export const elements = document.querySelector('.elements');
+export const cardsContainer = document.querySelector('.elements');

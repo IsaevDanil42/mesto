@@ -23,4 +23,8 @@ export default class UserInfo {
   setUserAvatar(avatarUrl) {
     this.#avatarElement.src = avatarUrl;
   }
+
+  serUserId(id) {
+    this.userId = id;
+  }
 }

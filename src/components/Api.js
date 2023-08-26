@@ -80,5 +80,6 @@ export default class Api {
         avatar: avatar
       })
     })
+    .then(this.#onResponce)
   }
 }

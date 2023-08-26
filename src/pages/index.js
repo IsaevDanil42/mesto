@@ -36,15 +36,14 @@ const editForm = new PopupWithForm(
   '#edit',
   {
     submitCallback: (e, inputValues) => {
-      const submitBtn = document.querySelector('#edit').querySelector('.popup__submit-btn');
-      submitBtn.textContent = 'Сохранение...';
+      editForm.renderLoading(true);
       api.editProfile(inputValues.name, inputValues.profession)
         .then((userData) => {
           userInfo.setUserInfo(userData.name, userData.about);
           editForm.close();
         })
         .catch((err) => console.log(err))
-        .finally(() => submitBtn.textContent = 'Сохраненить')
+        .finally(() => editForm.renderLoading(false))
     },
     disableButton: () => {
       editFormValidator.disableButton()
@@ -54,15 +53,14 @@ const addForm = new PopupWithForm(
   '#add',
   {
     submitCallback: (e, inputValues) => {
-      const submitBtn = document.querySelector('#add').querySelector('.popup__submit-btn');
-      submitBtn.textContent = 'Создание...';
+      addForm.renderLoading(true, 'Создание...');
       api.addCard(inputValues.name, inputValues.link)
         .then((card) => {
           cardsSection.addItem(createCard(card));
           addForm.close();
         })
         .catch((err) => console.log(err))
-        .finally(() => submitBtn.textContent = 'Создать')
+        .finally(() => addForm.renderLoading(false))
     },
     disableButton: () => {
       addFormValidator.disableButton()
@@ -86,15 +84,14 @@ const updateAvatarForm = new PopupWithForm(
   '#avatar',
   {
     submitCallback: (e, inputValues) => {
-      const submitBtn = document.querySelector('#avatar').querySelector('.popup__submit-btn');
-      submitBtn.textContent = 'Сохранение...';
+      updateAvatarForm.renderLoading(true);
       api.updateAvatar(inputValues.link)
       .then(() => {
         userInfo.setUserAvatar(inputValues.link);
         updateAvatarForm.close();
       })
       .catch((err) => console.log(err))
-      .finally(() => submitBtn.textContent = 'Сохраненить')
+      .finally(() => updateAvatarForm.renderLoading(false))
     },
     disableButton: () => {
       updateAvatarValidator.disableButton()
@@ -108,15 +105,12 @@ deleteForm.setEventListeners();
 updateAvatarForm.setEventListeners();
 popupImage.setEventListeners();
 
-
-api.getInitialCards()
-  .then((initialCards) => {cardsSection.renderItems(initialCards)})
-  .catch((err) => console.log(err))
-
-api.getUserInfo()
-  .then((userData) => {
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([initialCards, userData]) => {
     userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setUserAvatar(userData.avatar);
+    userInfo.serUserId(userData._id);
+    cardsSection.renderItems(initialCards);
   })
   .catch((err) => console.log(err))
 
@@ -129,6 +123,7 @@ profileAvatar.addEventListener('click', handleAvatarForm);
 function createCard(cardItem) {
   const card = new Card({
     cardItem,
+    userId: userInfo.userId,
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
     },

@@ -3,6 +3,7 @@ export default class Card {
   #link;
   #token;
   #likes;
+  #userId
   #handleCardClick;
   #handleDeleteClick;
   #handleAddLike;
@@ -11,11 +12,12 @@ export default class Card {
   element;
   #elementPhoto;
   elementCounter;
-  constructor({ cardItem, handleCardClick, handleDeleteClick, handleAddLike, handleRemoveLike }, templateSelector) {
+  constructor({ cardItem, userId, handleCardClick, handleDeleteClick, handleAddLike, handleRemoveLike }, templateSelector) {
     this.#name = cardItem.name;
     this.#link = cardItem.link;
     this.cardId = cardItem._id;
     this.#token = cardItem.owner._id;
+    this.#userId = userId;
     this.#likes = cardItem.likes;
     this.#handleCardClick = handleCardClick;
     this.#handleDeleteClick = handleDeleteClick;
@@ -69,11 +71,11 @@ export default class Card {
     this.#elementPhoto = this.element.querySelector('.elements__photo');
     this.elementCounter = this.element.querySelector('.elements__like-counter');
     this.#setEventListeners();
-    if(this.#token === '47aa8bce2553005fe9d15a6b') {
+    if(this.#token === this.#userId) {
       this.element.querySelector('.elements__delete-btn').style.display = 'block';
     }
     for(let i = 0; i < this.#likes.length; i++){
-      if(this.#likes[i]._id === '47aa8bce2553005fe9d15a6b') {
+      if(this.#likes[i]._id === this.#userId) {
         this.element.querySelector('.elements__like').classList.add('elements__like_active');
       }
     }
